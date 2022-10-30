@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 button {
-  @apply px-5 py-3 font-medium;
+  @apply px-5 py-3 font-medium transition-colors;
 }
 
 .primary {
