@@ -1,10 +1,11 @@
 <template>
-  <button :class="buttonClass" @click="handleClick">
+  <button :class="buttonClass">
     {{ text }}
   </button>
 </template>
 
 <script>
+import { computed, toRefs } from "vue";
 export default {
   name: "ActionButton",
   props: {
@@ -20,16 +21,20 @@ export default {
       },
     },
   },
-  computed: {
-    buttonClass() {
-      return {
-        [this.type]: true,
-      };
-    },
+  setup(props) {
+    const { type } = toRefs(props);
+
+    const buttonClass = computed(() => ({ [type.value]: true }));
+
+    return { buttonClass };
   },
-  methods: {
-    handleClick() {},
-  },
+  // computed: {
+  //   buttonClass() {
+  //     return {
+  //       [this.type]: true,
+  //     };
+  //   },
+  // },
 };
 </script>
 
