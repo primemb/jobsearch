@@ -4,7 +4,10 @@ import { useRoute } from "vue-router";
 const useCurrentPage = () => {
   const route = useRoute();
 
-  const currentPage = computed(() => Number.parseInt(route.query.page || "1"));
+  const currentPage = computed(() => {
+    const page = route.query.page as string;
+    return Number.parseInt(page || "1");
+  });
 
   return currentPage;
 };

@@ -3,7 +3,11 @@
     <div class="mt-5">
       <fieldset>
         <ul class="flex flex-row flex-wrap">
-          <li v-for="value in uniqueValues" :key="value" class="w-1/2 h-8">
+          <li
+            v-for="value in uniqueValues"
+            :key="value"
+            class="w-1/2 h-8 flex flex-row justify-start items-center"
+          >
             <input
               :id="value"
               v-model="selectedValues"

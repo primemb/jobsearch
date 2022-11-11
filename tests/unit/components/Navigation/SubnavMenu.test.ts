@@ -2,9 +2,11 @@ import { mount } from "@vue/test-utils";
 
 import { useFilteredJobs } from "@/store/composables";
 jest.mock("@/store/composables");
+const useFilteredJobsMock = useFilteredJobs as jest.Mock;
 
-import useConfirmRoute from "@/composables/useConfirmRoute.js";
-jest.mock("@/composables/useConfirmRoute.js");
+import useConfirmRoute from "@/composables/useConfirmRoute";
+jest.mock("@/composables/useConfirmRoute");
+const useConfirmRouteMock = useConfirmRoute as jest.Mock;
 
 import SubnavMenu from "@/components/Navigation/SubnavMenu.vue";
 
@@ -18,9 +20,9 @@ describe("SubnavMenu", () => {
   });
   describe("when user is on job page", () => {
     it("displays job count", () => {
-      useConfirmRoute.mockReturnValue(true);
+      useConfirmRouteMock.mockReturnValue(true);
 
-      useFilteredJobs.mockReturnValue([{ id: 1 }, { id: 2 }]);
+      useFilteredJobsMock.mockReturnValue([{ id: 1 }, { id: 2 }]);
 
       const wrapper = mount(SubnavMenu, createConfig());
 
@@ -32,9 +34,9 @@ describe("SubnavMenu", () => {
 
   describe("when user is not on job page", () => {
     it("displays job count", () => {
-      useConfirmRoute.mockReturnValue(false);
+      useConfirmRouteMock.mockReturnValue(false);
 
-      useFilteredJobs.mockReturnValue([]);
+      useFilteredJobsMock.mockReturnValue([]);
 
       const wrapper = mount(SubnavMenu, createConfig());
 

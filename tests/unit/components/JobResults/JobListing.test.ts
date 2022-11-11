@@ -1,16 +1,11 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
+import { Job } from "@/api/types";
+import { createJob } from "../../store/utils";
 
 describe("JobListing", () => {
-  const createJobProps = (jobProps = {}) => ({
-    title: "Vue Developer",
-    organization: "AirBnB",
-    locations: ["Orlando"],
-    ...jobProps,
-  });
-
-  const createConfig = (jobProps) => ({
+  const createConfig = (jobProps: Job) => ({
     global: {
       stubs: {
         RouterLink: RouterLinkStub,
@@ -24,26 +19,26 @@ describe("JobListing", () => {
   });
 
   it("renders job title", () => {
-    const jobProps = createJobProps({ title: "Vue Programmer" });
+    const jobProps = createJob({ title: "Vue Programmer" });
     const wrapper = mount(JobListing, createConfig(jobProps));
     expect(wrapper.text()).toMatch("Vue Programmer");
   });
 
   it("renders job organization", () => {
-    const jobProps = createJobProps({ organization: "AirBnB" });
+    const jobProps = createJob({ organization: "AirBnB" });
     const wrapper = mount(JobListing, createConfig(jobProps));
     expect(wrapper.text()).toMatch("AirBnB");
   });
 
   it("renders job locations", () => {
-    const jobProps = createJobProps({ locations: ["Orlando", "Jacksonvile"] });
+    const jobProps = createJob({ locations: ["Orlando", "Jacksonvile"] });
     const wrapper = mount(JobListing, createConfig(jobProps));
     expect(wrapper.text()).toMatch("Orlando");
     expect(wrapper.text()).toMatch("Jacksonvile");
   });
 
   it("renders job qualifications", () => {
-    const jobProps = createJobProps({
+    const jobProps = createJob({
       minimumQualifications: ["Code", "Developed"],
     });
     const wrapper = mount(JobListing, createConfig(jobProps));
@@ -52,7 +47,7 @@ describe("JobListing", () => {
   });
 
   it("links to individual job's page", () => {
-    const jobProps = createJobProps({ id: 15 });
+    const jobProps = createJob({ id: 15 });
     const wrapper = mount(JobListing, createConfig(jobProps));
     const jobPageLink = wrapper.findComponent(RouterLinkStub);
     const toProp = jobPageLink.props("to");

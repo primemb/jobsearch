@@ -12,16 +12,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import useConfirmRoute from "@/composables/useConfirmRoute";
 import { useFilteredJobs } from "@/store/composables";
 
-export default {
+export default defineComponent({
   name: "SubnavMenu",
   setup() {
     const FILTERED_JOBS = useFilteredJobs();
     const onJobResultPage = useConfirmRoute("JobResults");
     return { onJobResultPage, FILTERED_JOBS };
   },
-};
+});
 </script>

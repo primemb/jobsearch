@@ -18,9 +18,9 @@
   </div>
 </template>
 
-<script>
-import { computed, ref } from "vue";
-export default {
+<script lang="ts">
+import { computed, ref, defineComponent } from "vue";
+export default defineComponent({
   name: "AccordionComp",
   props: {
     header: {
@@ -41,7 +41,7 @@ export default {
 
     return { open, isOpen, caretIcon };
   },
-};
+});
 </script>
 
 <style scoped>
